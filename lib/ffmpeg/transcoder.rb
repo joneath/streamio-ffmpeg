@@ -54,7 +54,7 @@ module FFMPEG
               else # better make sure it wont blow up in case of unexpected output
                 time = 0.0
               end
-              progress = time / @movie.duration
+              progress = time / (@movie.duration || 1)
               yield(progress) if block_given?
             end
             if line =~ /Unsupported codec/
