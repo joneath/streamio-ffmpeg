@@ -9,7 +9,12 @@ module FFMPEG
     def initialize(path)
       @path = path
 
-      unless URI.parse(path).scheme.nil?
+      url = false
+      begin
+        url = !URI.parse(path).scheme.nil?
+      rescue
+      end
+      if url
         return
       else
         raise Errno::ENOENT, "the file '#{path}' does not exist" unless File.exists?(path)
